@@ -16,12 +16,17 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email',EmailType::class)
-            ->add('roles', ChoiceType::class,[
-                "mapped"=>false,
-                "multiple"=>true,
-                "choices" => ["Select Roles"=>null,"Role Admin" => "ROLE_ADMIN","Role Employee"=>"ROLE_EMPLOYEE","Role Manager"=>"ROLE_MANAGER"]]
-                )
+            ->add('email', EmailType::class)
+            ->add(
+                'roles',
+                ChoiceType::class,
+                [
+                    "multiple" => true,
+                    "choices" => [
+                         "Role Admin" => "ROLE_ADMIN", "Role Employee" => "ROLE_EMPLOYEE", "Role Manager" => "ROLE_MANAGER"
+                        ]
+                ]
+            )
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',
@@ -33,11 +38,10 @@ class UserType extends AbstractType
             ->add('firstName')
             ->add('middleName')
             ->add('lastName')
-            ->add('gender', ChoiceType::class,["choices" => ["Select Gender"=>null,"Male" => "M","Female"=>"F"]])
+            ->add('gender', ChoiceType::class, ["choices" => ["Male" => "M", "Female" => "F"]])
             ->add('dateOfBirth')
             ->add('isActive')
-            ->add('createdAt')
-        ;
+            ->add('createdAt');
     }
 
     public function configureOptions(OptionsResolver $resolver)
