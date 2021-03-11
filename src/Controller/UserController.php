@@ -41,6 +41,8 @@ class UserController extends AbstractController
           //  dd($user_data);
           $user->setPassword($userPasswordEncoderInterface->encodePassword($user,$user->getPassword()));
             $user->setRoles($user_data['roles']);
+            $user->setCreatedAt(new \DateTime('now'));
+            $user->setIsActive(1);
             $entityManager->persist($user);
             $entityManager->flush();
 

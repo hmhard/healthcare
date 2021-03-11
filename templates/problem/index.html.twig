@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Problem index{% endblock %}
+
+{% block body %}
+   <div class="col-xl-8 order-xl-1">
+          <div class="card">
+            <div class="card-header">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h3 class="mb-0">Feed required requirements </h3>
+                </div>
+                <div class="col-4 text-right">
+                  <a href="{{path('problem_new')}}" class="btn   btn-primary">Create New</a>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+
+     <table class="table align-items-center table-flush table-responsive">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>SiteHistory</th>
+                <th>RegionalProblem</th>
+                <th>Frequency</th>
+                <th>SolutionsTaken</th>
+                <th>IsFixed</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for problem in problems %}
+            <tr>
+                <td>{{ problem.id }}</td>
+                <td>{{ problem.siteHistory|slice(0, 30) ~ '...' }}</td>
+                <td>{{ problem.regionalProblem|slice(0, 30) ~ '...' }}</td>
+                <td>{{ problem.frequency }}</td>
+                <td>{{ problem.solutionsTaken|slice(0, 30) ~ '...' }}</td>
+                <td>{{ problem.isFixed ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a class="btn btn-sm btn-info" href="{{ path('problem_show', {'id': problem.id}) }}">show</a>
+                    <a class="btn btn-sm btn-warning" href="{{ path('problem_edit', {'id': problem.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+ 
+     </div>
+          </div>
+        </div>
+      </div>
+{% endblock %}

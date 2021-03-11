@@ -3,10 +3,23 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
- 
-    <h1>Users List</h1>
+    {# {% block maintitle %} Users List{% endblock %}  #}
+   <div class="col-sm-8 order-xs-1">
+          <div class="card">
+            <div class="card-header">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h3 class="mb-0">Users List </h3>
+                </div>
+                <div class="col-4 text-right">
+                  <a href="{{path('user_new')}}" class="btn btn-sm btn-primary">Register New</a>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
 
-    <table class="table align-items-center table-flush">
+
+    <table class="table align-items-center table-flush table-responsive">
         <thead>
             <tr>
                 <th>#</th>
@@ -26,7 +39,7 @@
         <tbody>
         {% for user in users %}
             <tr>
-                <td>{{ user.id }}</td>
+                <td>{{ loop.index }}</td>
                 <td>{{ user.email }}</td>
                
               
@@ -35,11 +48,11 @@
                 <td>{{ user.lastName }}</td>
                 <td>{{ user.gender }}</td>
                 <td>{{ user.dateOfBirth ? user.dateOfBirth|date('Y-m-d') : '' }}</td>
-                <td>{{ user.isActive ? 'Yes' : 'No' }}</td>
+                <td><span class="badge {{ user.isActive ? 'badge-success' : 'badge-danger' }}">{{ user.isActive ? 'Yes' : 'No' }}</span></td>
                 <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+                    <a class="btn btn-sm btn-info" href="{{ path('user_show', {'id': user.id}) }}">show</a>
+                    <a class="btn btn-sm btn-warning" href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -50,6 +63,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('user_new') }}">Create new</a>
-    
+   
+      </div>
+          </div>
+        </div>
+      </div>
 {% endblock %}

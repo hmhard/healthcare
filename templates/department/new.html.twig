@@ -1,26 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit User{% endblock %}
+{% block title %}New Department{% endblock %}
 
 {% block body %}
-    <div class="col-sm-8 order-xs-1">
+        <div class="col-xl-8 order-xl-1">
           <div class="card">
             <div class="card-header">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0"> Edit User </h3>
+                  <h3 class="mb-0">Feed required requirements </h3>
                 </div>
                 <div class="col-4 text-right">
-                  <a href="{{path('user_index')}}" class="btn btn-sm btn-primary">Back</a>
+                  <a href="{{path('department_index')}}" class="btn btn-sm btn-primary">Back</a>
                 </div>
               </div>
             </div>
             <div class="card-body">
+         
 
+    {{ include('department/_form.html.twig') }}
 
-    {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
- 
-    {{ include('user/_delete_form.html.twig') }}
     </div>
     </div>
     </div>

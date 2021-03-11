@@ -1,4 +1,73 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+ 
+   {{ form_start(form) }}
+                <h6 class="heading-small text-muted mb-4">Required information</h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                      
+                      {{ form_label(form.email,null, {'label_attr': {'class': 'foo'}}) }}
+                        {{form_widget(form.email,{attr:{"class":"form-control","placeholder":"Email"}})}}
+                        {# <input type="text" id="input-username" class="form-control" placeholder="Username" value="lucky.jesse"> #}
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                         {{ form_label(form.password.first,null, {'label_attr': {'class': 'foo'}}) }}
+                        {{form_widget(form.password.first,{attr:{"class":"form-control","placeholder":"password"}})}}
+                      </div>
+                    </div>
+                       <div class="col-lg-4">
+                      <div class="form-group">
+                         {{ form_label(form.password.second,null, {'label_attr': {'class': 'foo'}}) }}
+                        {{form_widget(form.password.second,{attr:{"class":"form-control","placeholder":"Confirm password"}})}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                           {{ form_label(form.firstName,null, {'label_attr': {'class': 'foo'}}) }}
+                        {{form_widget(form.firstName,{attr:{"class":"form-control","placeholder":"firstName"}})}}
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                           {{ form_label(form.middleName,null, {'label_attr': {'class': 'foo'}}) }}
+                        {{form_widget(form.middleName,{attr:{"class":"form-control","placeholder":"middle Name"}})}}
+                      </div>
+                    </div>
+                     <div class="col-lg-4">
+                      <div class="form-group">
+                           {{ form_label(form.lastName,null, {'label_attr': {'class': 'foo'}}) }}
+                        {{form_widget(form.lastName,{attr:{"class":"form-control","placeholder":"lastName"}})}}
+                      </div>
+                    </div>
+                     <div class="col-lg-3">
+                      <div class="form-group">
+                           {{ form_label(form.gender,null, {'label_attr': {'class': 'foo'}}) }}
+                        {{form_widget(form.gender,{attr:{"class":"form-control","placeholder":"lastName"}})}}
+                      </div>
+                    </div>
+                     <div class="col-lg-4">
+                      <div class="form-group">
+                           {{ form_label(form.dateOfBirth,null, {'label_attr': {'class': 'foo'}}) }}
+                        {{form_widget(form.dateOfBirth,{attr:{"class":"form-control","placeholder":"lastName"}})}}
+                      </div>
+                    </div>
+                     <div class="col-lg-4">
+                      <div class="form-group">
+                           {{ form_label(form.roles,null, {'label_attr': {'class': 'foo'}}) }}
+                        {{form_widget(form.roles,{attr:{"class":"form-control","placeholder":"lastName"}})}}
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+            
+                <!-- Address -->
+                    
+               
+                   <button type="submit" class="btn  btn-info  mr-4  float-right">Submit</button>
+             {{form_end(form)}}

@@ -69,9 +69,19 @@ class User implements UserInterface
      */
     private $createdAt;
 
+    public function __construct() {
+        $this->isActive = true;
+    }
     public function getId(): ?int
     {
         return $this->id;
+    }
+    public function __toString(){
+   return $this->firstName." ".$this->middleName;
+    }
+    public function getMyBirthDate()
+    {
+        return date_diff($this->dateOfBirth,(new \DateTime('now')))->y." Years old";
     }
 
     public function getEmail(): ?string
