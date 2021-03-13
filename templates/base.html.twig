@@ -323,13 +323,13 @@
               </div>
               <div class="text-center">
                 <h5 class="h3">
-                  {{app.user}}<span class="font-weight-light">, {{app.user.myBirthDate}}</span>
+                  {{app.user}}<span class="font-weight-light">, {{app.user ? app.user.myBirthDate:""}}</span>
                 </h5>
                 <div class="h5 font-weight-300">
                   <i class="ni location_pin mr-2"></i>Ethiopia
                 </div>
                 <div class="h5 mt-4">
-                  <i class="ni business_briefcase-24 mr-2"></i>Biomedical Engineer
+                  <i class="ni business_briefcase-24 mr-2"></i>{{app.user ? app.user.profession:""}}
                 </div>
                 <div>
                   <i class="ni education_hat mr-2"></i>Jimma University

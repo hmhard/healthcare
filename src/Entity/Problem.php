@@ -48,6 +48,12 @@ class Problem
      */
     private $department;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="problems")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $postedBy;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -121,6 +127,18 @@ class Problem
     public function setDepartment(?Department $department): self
     {
         $this->department = $department;
+
+        return $this;
+    }
+
+    public function getPostedBy(): ?User
+    {
+        return $this->postedBy;
+    }
+
+    public function setPostedBy(?User $postedBy): self
+    {
+        $this->postedBy = $postedBy;
 
         return $this;
     }

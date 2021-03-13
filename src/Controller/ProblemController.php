@@ -18,10 +18,12 @@ class ProblemController extends AbstractController
     /**
      * @Route("/", name="problem_index", methods={"GET"})
      */
-    public function index(ProblemRepository $problemRepository): Response
+    public function index(ProblemRepository $problemRepository ): Response
     {
+        $problems= $problemRepository->getData($this->getUser());
+        
         return $this->render('problem/index.html.twig', [
-            'problems' => $problemRepository->findAll(),
+            'problems' => $problems,
         ]);
     }
 

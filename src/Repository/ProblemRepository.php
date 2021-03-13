@@ -19,22 +19,28 @@ class ProblemRepository extends ServiceEntityRepository
         parent::__construct($registry, Problem::class);
     }
 
-    // /**
-    //  * @return Problem[] Returns an array of Problem objects
-    //  */
-    /*
-    public function findByExampleField($value)
+  
+    public function getData($user)
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
+        $qb= $this->createQueryBuilder('p');
+        if($user->getUserType() && $user->getUserType()->getId()==2){
+            $dept=[];
+            foreach($user->getDepartmentHeads() as $d)
+            $dept[]=$d->getDepartment();
+            $qb->andWhere('p.department in (:department)')
+            ->setParameter('department',$dept);
+        }    
+        if($user->getUserType() && $user->getUserType()->getId()==3){
+       $qb ->andWhere('p.postedBy = :postedBy')
+            ->setParameter('postedBy', $user);
+        }
+           return $qb ->orderBy('p.id', 'ASC')
+            
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+   
 
     /*
     public function findOneBySomeField($value): ?Problem

@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DepartmentHead index{% endblock %}
+
+{% block body %}
+ <div class="col-xl-8 order-xl-1">
+          <div class="card">
+            <div class="card-header">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h3 class="mb-0">Department Heads </h3>
+                </div>
+                <div class="col-4 text-right">
+                  <a href="{{path('department_head_new')}}" class="btn btn-sm btn-primary">New</a>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>User</th>
+                <th>Department</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for department_head in department_heads %}
+            <tr>
+                <td>{{ department_head.id }}</td>
+                <td>{{ department_head.user }}</td>
+                <td>{{ department_head.department }}</td>
+                <td>
+                    <a href="{{ path('department_head_show', {'id': department_head.id}) }}">show</a>
+                    <a href="{{ path('department_head_edit', {'id': department_head.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('department_head_new') }}">Create new</a>
+{% endblock %}

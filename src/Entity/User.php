@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -69,8 +71,31 @@ class User implements UserInterface
      */
     private $createdAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Profession::class)
+     */
+    private $profession;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=UserType::class, inversedBy="users")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $userType;
+
+    /**
+     * @ORM\OneToMany(targetEntity=DepartmentHead::class, mappedBy="user")
+     */
+    private $departmentHeads;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Problem::class, mappedBy="postedBy")
+     */
+    private $problems;
+
     public function __construct() {
         $this->isActive = true;
+        $this->departmentHeads = new ArrayCollection();
+        $this->problems = new ArrayCollection();
     }
     public function getId(): ?int
     {
@@ -240,6 +265,90 @@ class User implements UserInterface
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getProfession(): ?Profession
+    {
+        return $this->profession;
+    }
+
+    public function setProfession(?Profession $profession): self
+    {
+        $this->profession = $profession;
+
+        return $this;
+    }
+
+    public function getUserType(): ?UserType
+    {
+        return $this->userType;
+    }
+
+    public function setUserType(?UserType $userType): self
+    {
+        $this->userType = $userType;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|DepartmentHead[]
+     */
+    public function getDepartmentHeads(): Collection
+    {
+        return $this->departmentHeads;
+    }
+
+    public function addDepartmentHead(DepartmentHead $departmentHead): self
+    {
+        if (!$this->departmentHeads->contains($departmentHead)) {
+            $this->departmentHeads[] = $departmentHead;
+            $departmentHead->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDepartmentHead(DepartmentHead $departmentHead): self
+    {
+        if ($this->departmentHeads->removeElement($departmentHead)) {
+            // set the owning side to null (unless already changed)
+            if ($departmentHead->getUser() === $this) {
+                $departmentHead->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Problem[]
+     */
+    public function getProblems(): Collection
+    {
+        return $this->problems;
+    }
+
+    public function addProblem(Problem $problem): self
+    {
+        if (!$this->problems->contains($problem)) {
+            $this->problems[] = $problem;
+            $problem->setPostedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProblem(Problem $problem): self
+    {
+        if ($this->problems->removeElement($problem)) {
+            // set the owning side to null (unless already changed)
+            if ($problem->getPostedBy() === $this) {
+                $problem->setPostedBy(null);
+            }
+        }
 
         return $this;
     }

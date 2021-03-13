@@ -39,7 +39,9 @@ class UserType extends AbstractType
             ->add('middleName')
             ->add('lastName')
             ->add('gender', ChoiceType::class, ["choices" => ["Male" => "M", "Female" => "F"]])
-            ->add('dateOfBirth');
+            ->add('dateOfBirth')
+            ->add('userType')
+            ->add('profession');
           
     }
 

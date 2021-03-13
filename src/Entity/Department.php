@@ -34,15 +34,21 @@ class Department
      */
     private $problems;
 
+    /**
+     * @ORM\OneToMany(targetEntity=DepartmentHead::class, mappedBy="department")
+     */
+    private $departmentHeads;
+
     public function __construct()
     {
         $this->problems = new ArrayCollection();
+        $this->departmentHeads = new ArrayCollection();
     }
 
     public function __toString()
     {
-    return $this->name;
-}
+        return $this->name;
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -96,6 +102,36 @@ class Department
             // set the owning side to null (unless already changed)
             if ($problem->getDepartment() === $this) {
                 $problem->setDepartment(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|DepartmentHead[]
+     */
+    public function getDepartmentHeads(): Collection
+    {
+        return $this->departmentHeads;
+    }
+
+    public function addDepartmentHead(DepartmentHead $departmentHead): self
+    {
+        if (!$this->departmentHeads->contains($departmentHead)) {
+            $this->departmentHeads[] = $departmentHead;
+            $departmentHead->setDepartment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDepartmentHead(DepartmentHead $departmentHead): self
+    {
+        if ($this->departmentHeads->removeElement($departmentHead)) {
+            // set the owning side to null (unless already changed)
+            if ($departmentHead->getDepartment() === $this) {
+                $departmentHead->setDepartment(null);
             }
         }
 

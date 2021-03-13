@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Profession{% endblock %}
+
+{% block body %}
+ <div class="col-xl-8 order-xl-1">
+          <div class="card">
+            <div class="card-header">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h3 class="mb-0">Feed required requirements </h3>
+                </div>
+                <div class="col-4 text-right">
+                  <a href="{{path('problem_index')}}" class="btn btn-sm btn-primary">Back</a>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+
+    {{ include('profession/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('profession_index') }}">back to list</a>
+
+    {{ include('profession/_delete_form.html.twig') }}
+{% endblock %}
