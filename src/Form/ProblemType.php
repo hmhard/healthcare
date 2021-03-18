@@ -14,10 +14,17 @@ class ProblemType extends AbstractType
         $builder
             ->add('siteHistory')
             ->add('regionalProblem')
-            ->add('frequency')
+            ->add('frequency',null,[
+			"label"=>"Frequency(How Many times does this happened?)",
+			"attr"=>[
+			
+			"min"=>0
+			]
+			])
             ->add('solutionsTaken')
             ->add('isFixed')
             ->add('department')
+			  ->add('currentProblem')
         ;
     }
 

@@ -92,6 +92,12 @@ class User implements UserInterface
      */
     private $problems;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Department::class, inversedBy="users")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $department;
+
     public function __construct() {
         $this->isActive = true;
         $this->departmentHeads = new ArrayCollection();
@@ -349,6 +355,18 @@ class User implements UserInterface
                 $problem->setPostedBy(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDepartment(): ?Department
+    {
+        return $this->department;
+    }
+
+    public function setDepartment(?Department $department): self
+    {
+        $this->department = $department;
 
         return $this;
     }

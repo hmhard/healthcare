@@ -23,14 +23,17 @@
           
                 <h2>Id</h2>
                 <p>Issue-{{ problem.id }}</p>
-           
-                <h2>Site History</h2>
+             
+			 <h2>Site History</h2>
                 <p >{{ problem.siteHistory }}</p>
+                <h2>Current Problem</h2>
+                <p >{{ problem.currentProblem }}</p>
           
                 <h2>Regional Problem</h2>
                 <p>{{ problem.regionalProblem }}</p>
             
-                <h2>Frequency</h2>
+                
+                <h2>Frequency(How Many times does this happened?)</h2>
                 <p>{{ problem.frequency }}</p>
           
                 <h2>Solutions Taken</h2>
@@ -43,8 +46,9 @@
             
 
     <a class="btn btn-info float-left" href="{{ path('problem_new') }}">Add New</a>
+	{% if app.user == problem.postedBy %}
     <a class="btn btn-warning float-left" href="{{ path('problem_edit', {'id': problem.id}) }}">edit</a>
-
+{% endif %}
     {{ include('problem/_delete_form.html.twig') }}
 
     </div>

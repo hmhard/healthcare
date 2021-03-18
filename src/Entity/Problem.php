@@ -54,6 +54,11 @@ class Problem
      */
     private $postedBy;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $currentProblem;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -139,6 +144,18 @@ class Problem
     public function setPostedBy(?User $postedBy): self
     {
         $this->postedBy = $postedBy;
+
+        return $this;
+    }
+
+    public function getCurrentProblem(): ?string
+    {
+        return $this->currentProblem;
+    }
+
+    public function setCurrentProblem(string $currentProblem): self
+    {
+        $this->currentProblem = $currentProblem;
 
         return $this;
     }

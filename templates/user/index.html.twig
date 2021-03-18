@@ -30,6 +30,8 @@
                 <th>MiddleName</th>
                 <th>LastName</th>
                 <th>Gender</th>
+				   <th>User Type</th>
+				    <th>Department</th>
                 <th>DateOfBirth</th>
                 <th>IsActive</th>
                 <th>CreatedAt</th>
@@ -47,6 +49,8 @@
                 <td>{{ user.middleName }}</td>
                 <td>{{ user.lastName }}</td>
                 <td>{{ user.gender }}</td>
+				    <td>{{ user.userType }}</td>
+					    <td>{{ user.department }}</td>
                 <td>{{ user.dateOfBirth ? user.dateOfBirth|date('Y-m-d') : '' }}</td>
                 <td><span class="badge {{ user.isActive ? 'badge-success' : 'badge-danger' }}">{{ user.isActive ? 'Yes' : 'No' }}</span></td>
                 <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>

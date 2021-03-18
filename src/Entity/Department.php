@@ -39,10 +39,16 @@ class Department
      */
     private $departmentHeads;
 
+    /**
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="department")
+     */
+    private $users;
+
     public function __construct()
     {
         $this->problems = new ArrayCollection();
         $this->departmentHeads = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function __toString()
@@ -132,6 +138,36 @@ class Department
             // set the owning side to null (unless already changed)
             if ($departmentHead->getDepartment() === $this) {
                 $departmentHead->setDepartment(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->setDepartment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getDepartment() === $this) {
+                $user->setDepartment(null);
             }
         }
 

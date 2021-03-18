@@ -38,6 +38,7 @@ class ProblemController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+			$problem->setPostedBy($this->getUser());
             $entityManager->persist($problem);
             $entityManager->flush();
 

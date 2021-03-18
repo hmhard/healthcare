@@ -23,6 +23,7 @@
                 <th>#</th>
                 <th>Site History</th>
                 <th>Regional Problem</th>
+				  <th>Department</th>
                 <th>Frequency</th>
             
                 <th>Is Fixed</th>
@@ -35,13 +36,16 @@
                 <td>{{ loop.index }}</td>
                 <td>{{ problem.siteHistory|slice(0, 30) ~ '...' }}</td>
                 <td>{{ problem.regionalProblem|slice(0, 30) ~ '...' }}</td>
+				 <td>{{ problem.department }}</td>
                 <td>{{ problem.frequency }}</td>
             
                 <td><span class="badge {{ problem.isFixed ? 'badge-success' : 'badge-danger' }} ">{{ problem.isFixed ? 'Yes' : 'No' }}</span></td>
                 <td>
                     <a class="btn btn-sm btn-info" href="{{ path('problem_show', {'id': problem.id}) }}">show</a>
-                    <a class="btn btn-sm btn-warning" href="{{ path('problem_edit', {'id': problem.id}) }}">edit</a>
-                </td>
+{% if app.user == problem.postedBy %}                  
+				  <a class="btn btn-sm btn-warning" href="{{ path('problem_edit', {'id': problem.id}) }}">edit</a>
+                {% endif %}
+				</td>
             </tr>
         {% else %}
             <tr>

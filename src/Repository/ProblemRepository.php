@@ -23,17 +23,14 @@ class ProblemRepository extends ServiceEntityRepository
     public function getData($user)
     {
         $qb= $this->createQueryBuilder('p');
-        if($user->getUserType() && $user->getUserType()->getId()==2){
-            $dept=[];
-            foreach($user->getDepartmentHeads() as $d)
-            $dept[]=$d->getDepartment();
-            $qb->andWhere('p.department in (:department)')
+        if($user->getUserType() && $user->getUserType()->getId()!=1){
+            
+            $dept=$user->getDepartment();
+            
+            $qb->andWhere('p.department = :department')
             ->setParameter('department',$dept);
         }    
-        if($user->getUserType() && $user->getUserType()->getId()==3){
-       $qb ->andWhere('p.postedBy = :postedBy')
-            ->setParameter('postedBy', $user);
-        }
+        
            return $qb ->orderBy('p.id', 'ASC')
             
             ->getQuery()
